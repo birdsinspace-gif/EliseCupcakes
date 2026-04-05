@@ -1,81 +1,59 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function App() {
-  const [scrollY, setScrollY] = useState(0);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const heroImageY = useTransform(scrollY, [0, 700], [0, 140]);
+  const heroCopyY = useTransform(scrollY, [0, 500], [0, -36]);
 
-  const experiences = [
+  const offerings = [
     {
-      title: "Guided Contrast Cycles",
-      body: "Move between cedar sauna, cold plunge, and recovery lounge in a structured 75-minute social ritual."
+      title: "Celebration Cupcakes",
+      body: "Elegant cupcakes for birthdays, showers, parties, and meaningful family moments."
     },
     {
-      title: "Neighborhood Membership",
-      body: "Built for repeat practice, familiar faces, and a third place that feels grounded, warm, and local."
+      title: "Custom Design Orders",
+      body: "Color-led, flower-inspired frosting work tailored to your event palette and mood."
     },
     {
-      title: "Private Bookings",
-      body: "Reserve the space for founders, teams, birthdays, creative gatherings, or investor-hosted wellness nights."
+      title: "Boutique Presentation",
+      body: "Designed to feel giftable, polished, and beautiful on arrival."
     },
     {
-      title: "Evening Programming",
-      body: "Breathwork, ambient music nights, tea service, founder breakfasts, and curated community sessions."
+      title: "Small Batch Quality",
+      body: "Carefully made in limited runs so every order feels personal and intentional."
     }
   ];
 
-  const amenities = [
-    "Finnish-style dry sauna",
-    "Cold plunge circuit",
-    "Outdoor courtyard lounge",
-    "Tea and mineral bar",
-    "Private changing rooms",
-    "Member event calendar"
+  const occasions = [
+    "Baby showers",
+    "Birthdays",
+    "Church events",
+    "Bridal celebrations",
+    "Tea parties",
+    "Client gifts"
   ];
 
-  const rituals = [
+  const processSteps = [
     {
       number: "01",
-      title: "Arrive",
-      body: "Drop out of the noise, settle into the space, and transition out of the workday."
+      title: "Choose your date",
+      body: "Start with the occasion, guest count, and delivery or pickup timeline."
     },
     {
       number: "02",
-      title: "Heat",
-      body: "Step into dry heat designed to quiet the nervous system and open the body."
+      title: "Select your style",
+      body: "Pick a frosting look, color palette, and presentation style that fits the event."
     },
     {
       number: "03",
-      title: "Cold",
-      body: "Reset with cold immersion that sharpens attention, recovery, and presence."
+      title: "Confirm your order",
+      body: "Finalize flavors, quantities, and details with a simple, personal ordering process."
     },
     {
       number: "04",
-      title: "Connect",
-      body: "Stay for tea, conversation, and the kind of community that forms around repeat ritual."
-    }
-  ];
-
-  const memberships = [
-    {
-      name: "Day Pass",
-      price: "$38",
-      detail: "One 75-minute contrast session."
-    },
-    {
-      name: "Neighborhood",
-      price: "$145",
-      detail: "4 visits per month, priority booking, member pricing on events."
-    },
-    {
-      name: "Unlimited",
-      price: "$235",
-      detail: "Unlimited sessions, guest passes, and early access to programming."
+      title: "Serve beautifully",
+      body: "Receive cupcakes that feel joyful, polished, and ready for the table."
     }
   ];
 
@@ -87,138 +65,163 @@ export default function App() {
   } as const;
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8] text-[#181512]">
-      <section className="relative min-h-[92vh] overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(17,14,11,0.48), rgba(17,14,11,0.62)), url('/sauna-hero.jpg')",
-            transform: `translateY(${scrollY * 0.18}px) scale(1.05)`
-          }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_35%)]" />
+    <div className="min-h-screen bg-[#fff8fb] text-[#241c23]">
+      <section className="relative min-h-[95vh] overflow-hidden">
+        <motion.div
+          style={{ y: heroImageY }}
+          className="absolute inset-0 scale-110 bg-cover bg-center"
+        >
+          <div
+            className="h-full w-full"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(24,16,22,0.35), rgba(24,16,22,0.68)), url('/IMG_6239.JPG')"
+            }}
+          />
+        </motion.div>
 
-        <div className="relative mx-auto flex min-h-[92vh] max-w-7xl items-end px-6 pb-16 pt-28 md:px-10 md:pb-20">
-          <div className="max-w-5xl">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_35%)]" />
+
+        <div className="relative mx-auto flex min-h-[95vh] max-w-7xl items-end px-6 pb-16 pt-28 md:px-10 md:pb-20">
+          <motion.div style={{ y: heroCopyY }} className="max-w-5xl">
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
-              className="text-sm uppercase tracking-[0.32em] text-[#d5c6b6]"
+              className="text-sm uppercase tracking-[0.32em] text-[#f8d9e8]"
             >
-              Ember House
+              Rose Petal Cupcakes
             </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 34 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.05 }}
+              transition={{ duration: 0.85, delay: 0.06 }}
               className="mt-6 max-w-5xl text-5xl font-semibold leading-[0.96] tracking-tight text-white md:text-7xl"
             >
-              Sauna. Cold plunge.{" "}
-              <span className="text-[#d39a74]">Neighborhood ritual.</span>
+              Beautiful cupcakes,
+              <br />
+              made for sweet occasions.
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 26 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.16 }}
-              className="mt-8 max-w-2xl text-lg leading-8 text-[#efe4d7] md:text-xl"
+              transition={{ duration: 0.72, delay: 0.16 }}
+              className="mt-8 max-w-2xl text-lg leading-8 text-[#f4e6ee] md:text-xl"
             >
-              A premium sauna and cold plunge social club in Cabbagetown, Atlanta,
-              designed for recovery, rhythm, and real connection.
+              Small-batch cupcakes with floral frosting, soft color palettes, and a boutique presentation that feels instantly giftable.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.26 }}
+              transition={{ duration: 0.68, delay: 0.24 }}
               className="mt-10 flex flex-wrap gap-4"
             >
               <a
-                href="#membership"
-                className="rounded-2xl bg-[#1f2c26] px-8 py-4 text-sm font-medium text-white transition hover:bg-[#18211d]"
+                href="#order"
+                className="rounded-2xl bg-[#f08ab4] px-8 py-4 text-sm font-medium text-white transition hover:bg-[#e476a6]"
               >
-                View Memberships
+                Inquire About an Order
               </a>
               <a
-                href="#concept"
+                href="#gallery"
                 className="rounded-2xl border border-white/30 bg-white/10 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/15"
               >
-                Explore the Concept
+                View the Collection
               </a>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="-mt-10 relative z-10">
+        <div className="mx-auto grid max-w-6xl gap-4 px-6 md:grid-cols-3 md:px-10">
+          <div className="rounded-[1.5rem] border border-[#f0dce7] bg-white p-6 shadow-[0_12px_40px_rgba(36,28,35,0.06)]">
+            <p className="text-3xl font-semibold tracking-tight text-[#241c23]">Custom</p>
+            <p className="mt-2 text-sm leading-6 text-[#6e5f69]">
+              Designed around your color palette, event style, and presentation needs.
+            </p>
+          </div>
+          <div className="rounded-[1.5rem] border border-[#f0dce7] bg-white p-6 shadow-[0_12px_40px_rgba(36,28,35,0.06)]">
+            <p className="text-3xl font-semibold tracking-tight text-[#241c23]">Small Batch</p>
+            <p className="mt-2 text-sm leading-6 text-[#6e5f69]">
+              Crafted in limited runs to keep quality high and every order personal.
+            </p>
+          </div>
+          <div className="rounded-[1.5rem] border border-[#f0dce7] bg-white p-6 shadow-[0_12px_40px_rgba(36,28,35,0.06)]">
+            <p className="text-3xl font-semibold tracking-tight text-[#241c23]">Elegant</p>
+            <p className="mt-2 text-sm leading-6 text-[#6e5f69]">
+              Soft pinks, light blues, and floral details that elevate the entire table.
+            </p>
           </div>
         </div>
       </section>
 
       <motion.section
-        id="concept"
         {...sectionFade}
-        className="bg-[#f5f0e8]"
+        className="mx-auto max-w-7xl px-6 py-24 md:px-10"
       >
-        <div className="mx-auto max-w-7xl px-6 py-24 md:px-10">
-          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#6c6256]">
-                The Concept
-              </p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-                A modern bathhouse for people who want recovery with culture, not sterile wellness.
-              </h2>
-            </div>
+        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#8e7a87]">
+              The Brand
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+              A cupcake business built around beauty, celebration, and thoughtful presentation.
+            </h2>
+          </div>
 
-            <div className="space-y-6 text-lg leading-8 text-[#5b5349]">
-              <p>
-                Ember House is built around a simple premise: people come for the heat and cold, then stay for the atmosphere, the rhythm, and the community.
-              </p>
-              <p>
-                The model blends premium wellness with neighborhood social energy, creating a repeat-visit destination that feels both restorative and magnetic.
-              </p>
-            </div>
+          <div className="space-y-6 text-lg leading-8 text-[#6e5f69]">
+            <p>
+              Rose Petal Cupcakes is positioned as a boutique dessert brand for celebrations that deserve more than generic bakery trays.
+            </p>
+            <p>
+              The look is soft, feminine, polished, and memorable. The product is designed to photograph beautifully, gift beautifully, and arrive ready for the moment.
+            </p>
           </div>
         </div>
       </motion.section>
 
       <motion.section
         {...sectionFade}
-        className="overflow-hidden border-y border-[#e1d6c9] bg-[#fbf8f3]"
+        className="overflow-hidden border-y border-[#f0dce7] bg-[#fdf4f8]"
       >
         <div className="mx-auto grid max-w-7xl gap-0 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="px-6 py-24 md:px-10">
             <div className="max-w-3xl">
-              <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#6c6256]">
-                Experiences
+              <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#8e7a87]">
+                What sets it apart
               </p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-                Recovery designed to feel social, intentional, and worth returning to.
+                Premium styling, warm personality, and cupcakes made to feel special.
               </h2>
             </div>
 
             <div className="mt-12 grid gap-6 md:grid-cols-2">
-              {experiences.map((item, i) => (
+              {offerings.map((item, i) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.28 }}
                   transition={{ duration: 0.55, delay: i * 0.08 }}
-                  className="rounded-[1.75rem] border border-[#e3d7ca] bg-white p-8 shadow-[0_10px_35px_rgba(24,21,18,0.04)]"
+                  className="rounded-[1.75rem] border border-[#f0dce7] bg-white p-8 shadow-[0_10px_35px_rgba(36,28,35,0.04)]"
                 >
                   <h3 className="text-2xl font-semibold tracking-tight">{item.title}</h3>
-                  <p className="mt-4 text-base leading-7 text-[#5b5349]">{item.body}</p>
+                  <p className="mt-4 text-base leading-7 text-[#6e5f69]">{item.body}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="min-h-[420px] lg:min-h-full">
+          <div className="min-h-[460px] lg:min-h-full">
             <div
               className="h-full w-full bg-cover bg-center"
               style={{
                 backgroundImage:
-                  "linear-gradient(rgba(18,15,12,0.12), rgba(18,15,12,0.22)), url('/sauna-lounge.jpg')"
+                  "linear-gradient(rgba(36,28,35,0.10), rgba(36,28,35,0.24)), url('/IMG_6237.JPG')"
               }}
             />
           </div>
@@ -226,78 +229,69 @@ export default function App() {
       </motion.section>
 
       <motion.section
+        id="gallery"
         {...sectionFade}
         className="mx-auto max-w-7xl px-6 py-24 md:px-10"
       >
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#6c6256]">
-              The Ritual
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-              A repeatable flow people build into their week.
-            </h2>
-          </div>
+        <div className="max-w-3xl">
+          <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#8e7a87]">
+            Gallery
+          </p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+            Real cupcakes. Real presentation. Real event-ready product.
+          </h2>
+        </div>
 
-          <div className="space-y-5">
-            {rituals.map((step, i) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.28 }}
-                transition={{ duration: 0.55, delay: i * 0.08 }}
-                className="rounded-[1.75rem] border border-[#e3d7ca] bg-white p-6"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="rounded-2xl bg-[#8a4b2a] px-3 py-2 text-sm font-semibold text-white">
-                    {step.number}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">{step.title}</h3>
-                    <p className="mt-2 text-base leading-7 text-[#5b5349]">{step.body}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {["/IMG_6233.JPG", "/IMG_6234.JPG", "/IMG_6235.JPG"].map((src, i) => (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.28 }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="overflow-hidden rounded-[1.75rem] border border-[#f0dce7] bg-white shadow-[0_10px_35px_rgba(36,28,35,0.04)]"
+            >
+              <img src={src} alt="Cupcake design" className="h-[360px] w-full object-cover" />
+            </motion.div>
+          ))}
         </div>
       </motion.section>
 
       <motion.section
         {...sectionFade}
-        className="overflow-hidden border-y border-[#e1d6c9] bg-[#efe6d8]"
+        className="overflow-hidden border-y border-[#f0dce7] bg-[#f3f9ff]"
       >
         <div className="mx-auto grid max-w-7xl gap-0 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="min-h-[420px] lg:min-h-full">
+          <div className="min-h-[460px] lg:min-h-full">
             <div
               className="h-full w-full bg-cover bg-center"
               style={{
                 backgroundImage:
-                  "linear-gradient(rgba(18,15,12,0.18), rgba(18,15,12,0.28)), url('/sauna-detail.jpg')"
+                  "linear-gradient(rgba(24,20,28,0.12), rgba(24,20,28,0.24)), url('/IMG_6238.JPG')"
               }}
             />
           </div>
 
           <div className="px-6 py-24 md:px-10">
             <div>
-              <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#6c6256]">
-                Amenities
+              <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#8e7a87]">
+                Perfect for
               </p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-                Premium, tactile, and built for a strong first impression.
+                Occasions that deserve something softer, prettier, and more memorable.
               </h2>
             </div>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              {amenities.map((item, i) => (
+              {occasions.map((item, i) => (
                 <motion.div
                   key={item}
                   initial={{ opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="rounded-2xl border border-[#d6c8b7] bg-[#f8f2e9] px-5 py-5 text-base text-[#3d362f]"
+                  className="rounded-2xl border border-[#dcecf9] bg-white px-5 py-5 text-base text-[#4d4350]"
                 >
                   {item}
                 </motion.div>
@@ -308,66 +302,72 @@ export default function App() {
       </motion.section>
 
       <motion.section
-        id="membership"
         {...sectionFade}
         className="mx-auto max-w-7xl px-6 py-24 md:px-10"
       >
-        <div className="max-w-3xl">
-          <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#6c6256]">
-            Membership
-          </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-            Structured for both drop-ins and recurring local members.
-          </h2>
-        </div>
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#8e7a87]">
+              Ordering process
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+              Easy for the client, polished from start to finish.
+            </h2>
+          </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {memberships.map((item, i) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.28 }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
-              className="rounded-[1.75rem] border border-[#e3d7ca] bg-white p-8 shadow-[0_10px_35px_rgba(24,21,18,0.04)]"
-            >
-              <p className="text-sm uppercase tracking-[0.24em] text-[#6c6256]">
-                {item.name}
-              </p>
-              <p className="mt-4 text-5xl font-semibold tracking-tight">{item.price}</p>
-              <p className="mt-4 text-base leading-7 text-[#5b5349]">{item.detail}</p>
-            </motion.div>
-          ))}
+          <div className="space-y-5">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.28 }}
+                transition={{ duration: 0.55, delay: i * 0.08 }}
+                className="rounded-[1.75rem] border border-[#f0dce7] bg-white p-6"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="rounded-2xl bg-[#8dcdf3] px-3 py-2 text-sm font-semibold text-[#173042]">
+                    {step.number}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">{step.title}</h3>
+                    <p className="mt-2 text-base leading-7 text-[#6e5f69]">{step.body}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.section>
 
       <motion.section
+        id="order"
         {...sectionFade}
-        className="bg-[#1d2621] text-white"
+        className="bg-[#201a20] text-white"
       >
         <div className="mx-auto max-w-6xl px-6 py-24 text-center md:px-10">
-          <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#a8b7ac]">
-            Cabbagetown, Atlanta
+          <p className="text-sm font-medium uppercase tracking-[0.24em] text-[#e8bfd1]">
+            Order inquiry
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
-            Built for founders, creatives, operators, and locals who want a better ritual.
+            Cupcakes that look as special as the event feels.
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#d6dfd8]">
-            Ember House is presented here as a premium, investor-ready concept for a sauna and cold plunge social club in one of Atlanta’s most culture-rich neighborhoods.
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#eadfe7]">
+            Rose Petal Cupcakes is presented as a premium small-batch cupcake brand with boutique styling, floral frosting work, and celebration-first presentation.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
-              href="mailto:founding@emberhouseatl.com"
-              className="rounded-2xl bg-white px-8 py-4 text-sm font-medium text-[#181512] transition hover:bg-[#efe6d8]"
+              href="mailto:orders@rosepetalcupcakes.com"
+              className="rounded-2xl bg-[#f08ab4] px-8 py-4 text-sm font-medium text-white transition hover:bg-[#e476a6]"
             >
-              founding@emberhouseatl.com
+              orders@rosepetalcupcakes.com
             </a>
             <a
-              href="#membership"
-              className="rounded-2xl border border-[#55645a] px-8 py-4 text-sm font-medium text-white transition hover:bg-[#263129]"
+              href="#gallery"
+              className="rounded-2xl border border-[#6b5a67] px-8 py-4 text-sm font-medium text-white transition hover:bg-[#2a222a]"
             >
-              View the Model
+              View Gallery
             </a>
           </div>
         </div>
