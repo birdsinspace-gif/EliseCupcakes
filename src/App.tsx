@@ -90,7 +90,7 @@ export default function App() {
               transition={{ duration: 0.55 }}
               className="text-sm uppercase tracking-[0.32em] text-[#f8d9e8]"
             >
-              Rose Petal Cupcakes
+              Elise's Cupcakes
             </motion.p>
 
             <motion.h1
@@ -175,7 +175,7 @@ export default function App() {
 
           <div className="space-y-6 text-lg leading-8 text-[#6e5f69]">
             <p>
-              Rose Petal Cupcakes is positioned as a boutique dessert brand for celebrations that deserve more than generic bakery trays.
+              Elise&apos;s Cupcakes is positioned as a boutique dessert brand for celebrations that deserve more than generic bakery trays.
             </p>
             <p>
               The look is soft, feminine, polished, and memorable. The product is designed to photograph beautifully, gift beautifully, and arrive ready for the moment.
@@ -353,15 +353,15 @@ export default function App() {
             Cupcakes that look as special as the event feels.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#eadfe7]">
-            Rose Petal Cupcakes is presented as a premium small-batch cupcake brand with boutique styling, floral frosting work, and celebration-first presentation.
+            Elise&apos;s Cupcakes is presented as a premium small-batch cupcake brand with boutique styling, floral frosting work, and celebration-first presentation.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
-              href="mailto:orders@rosepetalcupcakes.com"
+              href="mailto:orders@elisescupcakes.com"
               className="rounded-2xl bg-[#f08ab4] px-8 py-4 text-sm font-medium text-white transition hover:bg-[#e476a6]"
             >
-              orders@rosepetalcupcakes.com
+              orders@elisescupcakes.com
             </a>
             <a
               href="#gallery"
